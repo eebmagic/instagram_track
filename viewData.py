@@ -10,6 +10,9 @@ with open(record_path, 'r') as file:
 
 header = "Time                 |  Followers \tFollowing \tPosts"
 print(header)
-print("-" * (len(header)+ 10))
+print("-" * (len(header) + 10))
 for time, data in oldData.items():
-	print(f"{time}  |  {data['Followers']} \t\t{data['Following']} \t\t{data['Posts']}")
+	follows = data['Followers']
+	following = data['Following']
+	posts = data['Posts']
+	print(f"{time}  |  {follows} \t\t{following} \t\t{posts}")
