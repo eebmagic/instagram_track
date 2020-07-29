@@ -1,18 +1,25 @@
 import json
-import os
 
-container_path = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
+jsonPATH = "/home/ethanbolton/pythonTools/instagram_track/pastData.json"
 
-record_path = container_path + "pastData.json"
-
-with open(record_path, 'r') as file:
-	oldData = json.load(file)
+with open(jsonPATH, 'r') as file:
+    oldData = json.load(file)
 
 header = "Time                 |  Followers \tFollowing \tPosts"
+border = "-" * (len(header) + 10)
+
 print(header)
-print("-" * (len(header) + 10))
+print(border)
+
 for time, data in oldData.items():
-	follows = data['Followers']
-	following = data['Following']
-	posts = data['Posts']
-	print(f"{time}  |  {follows} \t\t{following} \t\t{posts}")
+    print(f"{time}  |  {data['Followers']} \t\t{data['Following']} \t\t{data['Posts']}")
+
+print(border)
+print(header)
+
+userResp = input("\n\tSend pastData.json to Drive? (Y/n): ").lower()
+if userResp != 'n':
+    import os
+    print("Uploading...")
+    os.system("rclone copy /home/ethanbolton/pythonTools/instagram_track/pastData.json Drive:/fromRclone/")
+    print("Finished uploading to Drive:/fromRclone/")
