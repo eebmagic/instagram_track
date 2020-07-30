@@ -16,14 +16,14 @@ def parse_line(l):
 
 
 # Constants
-recordFilePATH = "/home/ethanbolton/pythonTools/instagram_check/pastData.json"
-urlFile = "/home/ethanbolton/pythonTools/instagram_check/URL.txt"
+recordFilePATH = "/home/ethanbolton/pythonTools/instagram_track/pastData.json"
+urlFile = "/home/ethanbolton/pythonTools/instagram_track/URL.txt"
 key = '<meta property="og:description" content="'
 
 
 # Make current time string
 current_time = time.strftime('%Y/%m/%d - %X')
-print(current_time)
+# print(current_time)
 
 # Load url
 with open(urlFile) as file:
@@ -36,16 +36,16 @@ lines = r_html.split('\n')
 # Find and parse data
 for line in lines:
     if key in line:
-        print(line)
+        # print(line)
         values = parse_line(line)
-        print(current_time, values)
+        # print(current_time, values)
 
 # Open old data
 with open(recordFilePATH, "r") as file:
 	data = json.load(file)
 
 data[current_time] = values
-print(data)
+# print(data)
 
 # Save new data
 with open(recordFilePATH, "w") as write_file:
