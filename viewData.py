@@ -11,7 +11,12 @@ border = "-" * (len(header) + 10)
 print(header)
 print(border)
 
-for time, data in oldData.items():
+keys = oldData.keys()
+keys = list(keys)
+keys.sort()
+
+for time in keys:
+    data = oldData[time]
     print(f"{time}  |  {data['Followers']} \t\t{data['Following']} \t\t{data['Posts']}")
 
 print(border)
