@@ -15,12 +15,17 @@ keys = oldData.keys()
 keys = list(keys)
 keys.sort()
 
+csv_out = ""
 for time in keys:
     data = oldData[time]
     print(f"{time}  |  {data['Followers']} \t\t{data['Following']} \t\t{data['Posts']}")
+    csv_out += f"{time}, {data['Followers']}, {data['Following']}, {data['Posts']}\n"
 
 print(border)
 print(header)
+
+with open("csv_data.csv", "w") as file:
+    file.write(csv_out)
 
 userResp = input("\n\tSend pastData.json to Drive? (Y/n): ").lower()
 if userResp != 'n':
